@@ -1,8 +1,9 @@
 ---
 - name: Check Installed Packages
-  hosts: localhost
+  hosts: test_hosts
   gather_facts: true
-  become: true
+      become: yes
+      become_method: sudo
 
   tasks:
     - name: List Installed Packages
