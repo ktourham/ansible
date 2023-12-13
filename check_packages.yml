@@ -5,7 +5,7 @@
   become: yes
   become_method: sudo
   
- tasks:
+  tasks:
     - name: Vérifier si Tomcat est installé
       stat:
         path: "/path/vers/tomcat/directory"
