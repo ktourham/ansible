@@ -20,3 +20,18 @@
       debug:
         msg: "Tomcat n'est pas installé"
       when: not tomcat_installed.stat.exists
+
+
+- name: Check Installed Packages
+  hosts: error_srv
+  gather_facts: true
+
+  tasks:
+    - name: List Installed Packages
+      shell: dpkg -l
+      register: dpkg_output
+      ignore_errors: yes
+
+    - name: Display Installed Packages
+      debug:
+        var: dpkg_output.stdout_lines
