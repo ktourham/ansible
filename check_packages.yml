@@ -2,6 +2,8 @@
 - name: Check Installed Packages
   hosts: localhost
   gather_facts: true
+  become: true
+  become_user: root
 
   tasks:
     - name: List Installed Packages
