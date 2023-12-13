@@ -4,13 +4,19 @@
   gather_facts: true
   become: yes
   become_method: sudo
+  
+ tasks:
+    - name: Vérifier si Tomcat est installé
+      stat:
+        path: "/path/vers/tomcat/directory"
+      register: tomcat_installed
 
-  tasks:
-    - name: List Installed Packages
-      shell: dpkg -l
-      register: dpkg_output
-      ignore_errors: yes
-
-    - name: Display Installed Packages
+    - name: Afficher le résultat
       debug:
-        var: dpkg_output.stdout_lines
+        msg: "Tomcat est installé"
+      when: tomcat_installed.stat.exists
+
+    - name: Afficher le résultat
+      debug:
+        msg: "Tomcat n'est pas installé"
+      when: not tomcat_installed.stat.exists
