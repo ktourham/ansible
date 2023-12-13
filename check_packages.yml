@@ -1,0 +1,14 @@
+---
+- name: Check Installed Packages
+  hosts: localhost
+  gather_facts: true
+
+  tasks:
+    - name: List Installed Packages
+      shell: dpkg -l
+      register: dpkg_output
+      ignore_errors: yes
+
+    - name: Display Installed Packages
+      debug:
+        var: dpkg_output.stdout_lines
